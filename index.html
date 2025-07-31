@@ -95,9 +95,8 @@
 				text-align: center;
 				color: white;
 				position: relative;
-				background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-					url("https://images.unsplash.com/photo-1581091012184-7f9d50c0e3a2?fit=crop&w=1200&q=80")
-						center/cover;
+				background: url("./img/fv.png") center/cover;
+				background-color: #2c2c2c; /* フォールバック用の背景色 */
 				transition: background 0.5s ease;
 			}
 
@@ -105,51 +104,39 @@
 				max-width: 800px;
 				padding: 0 40px;
 				z-index: 1;
-			}
-
-			.hero-logo {
-				width: 80px;
-				height: 2px;
-				background: #c4a96a;
-				margin: 0 auto 30px;
-			}
-
-			.hero h1 {
-				font-size: 4rem;
-				font-weight: 300;
-				letter-spacing: 4px;
-				margin-bottom: 10px;
-				text-transform: uppercase;
-			}
-
-			.hero-subtitle {
-				font-size: 1.2rem;
-				font-weight: 300;
-				letter-spacing: 2px;
-				opacity: 0.9;
-			}
-
-			.hero-nav {
-				position: absolute;
-				bottom: 40px;
-				left: 50%;
-				transform: translateX(-50%);
 				display: flex;
-				gap: 15px;
+				flex-direction: column;
+				align-items: center;
+				gap: 20px;
 			}
 
-			.hero-dot {
-				width: 12px;
-				height: 12px;
-				border: 2px solid rgba(255, 255, 255, 0.5);
-				border-radius: 50%;
-				cursor: pointer;
-				transition: all 0.3s ease;
+			.hero-main-title {
+				font-size: 7rem;
+				font-weight: bold;
+				letter-spacing: 4px;
+				margin: 0;
+				text-transform: uppercase;
+				color: white;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 			}
 
-			.hero-dot.active {
-				background: white;
-				border-color: white;
+			.hero-english-subtitle {
+				font-size: 1.4rem;
+				font-weight: normal;
+				letter-spacing: 2px;
+				margin: 0;
+				color: white;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+			}
+
+			.hero-japanese-subtitle {
+				position: absolute;
+				bottom: 130px;
+				font-size: 4.2rem;
+				font-weight: normal;
+				letter-spacing: 1px;
+				color: white;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 			}
 
 			/* Welcome Section */
@@ -673,8 +660,18 @@
 					display: block;
 				}
 
-				.hero h1 {
-					font-size: 2.5rem;
+				.hero-main-title {
+					font-size: 3rem;
+				}
+
+				.hero-english-subtitle {
+					font-size: 1.1rem;
+				}
+
+				.hero-japanese-subtitle {
+					bottom: 30px;
+					right: 30px;
+					font-size: 1rem;
 				}
 
 				.welcome-content,
@@ -771,16 +768,10 @@
 		<!-- Hero Section -->
 		<section class="hero" id="hero">
 			<div class="hero-content">
-				<div class="hero-logo"></div>
-				<h1>文武ん</h1>
-				<p class="hero-subtitle">プロフェッショナル便利屋サービス</p>
+				<h1 class="hero-main-title">文武ん</h1>
+				<p class="hero-english-subtitle">ENGINE FOR THE LIFE</p>
 			</div>
-			<div class="hero-nav">
-				<div class="hero-dot active"></div>
-				<div class="hero-dot"></div>
-				<div class="hero-dot"></div>
-				<div class="hero-dot"></div>
-			</div>
+			<div class="hero-japanese-subtitle">~住まいに豊かさを~</div>
 		</section>
 
 		<!-- Welcome Section -->
@@ -1022,6 +1013,10 @@
 		</footer>
 
 		<script>
+			// FV背景画像を固定
+			const hero = document.getElementById("hero");
+			hero.style.background = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('./img/mv.png') center/cover`;
+
 			// Smooth scrolling
 			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 				anchor.addEventListener("click", function (e) {
@@ -1045,36 +1040,6 @@
 					nav.style.background = "rgba(0, 0, 0, 0.9)";
 				}
 			});
-
-			// FV背景画像切替
-			const hero = document.getElementById("hero");
-			const dots = document.querySelectorAll(".hero-dot");
-			const heroImages = [
-				"https://images.unsplash.com/photo-1581091012184-7f9d50c0e3a2?fit=crop&w=1200&q=80",
-				"https://images.unsplash.com/photo-1521791136064-7986c2920216?fit=crop&w=1200&q=80",
-				"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?fit=crop&w=1200&q=80",
-				"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fit=crop&w=1200&q=80",
-			];
-			let currentIndex = 0;
-
-			function updateHeroBackground(index) {
-				hero.style.background = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${heroImages[index]}') center/cover`;
-				dots.forEach((d) => d.classList.remove("active"));
-				dots[index].classList.add("active");
-			}
-
-			dots.forEach((dot, i) => {
-				dot.addEventListener("click", () => {
-					currentIndex = i;
-					updateHeroBackground(currentIndex);
-				});
-			});
-
-			// Auto-rotate hero images
-			setInterval(() => {
-				currentIndex = (currentIndex + 1) % heroImages.length;
-				updateHeroBackground(currentIndex);
-			}, 5000);
 
 			// Gallery item hover effects
 			const galleryItems = document.querySelectorAll(".gallery-item");
