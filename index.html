@@ -86,7 +86,7 @@
 				transform: translateY(-2px);
 			}
 
-			/* Hero Section */
+			/* Hero Section - 新デザイン */
 			.hero {
 				height: 100vh;
 				display: flex;
@@ -96,47 +96,198 @@
 				color: white;
 				position: relative;
 				background: url("./img/fv.png") center/cover;
-				background-color: #2c2c2c; /* フォールバック用の背景色 */
-				transition: background 0.5s ease;
+				background-color: #2c2c2c;
+				overflow: hidden;
+			}
+
+			.hero::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(
+					135deg,
+					rgba(0, 0, 0, 0.3) 0%,
+					rgba(44, 44, 44, 0.5) 100%
+				);
+				z-index: 0;
 			}
 
 			.hero-content {
-				max-width: 800px;
+				max-width: 900px;
 				padding: 0 40px;
-				z-index: 1;
+				z-index: 2;
+				position: relative;
+			}
+
+			/* メインタイトルのアニメーション */
+			.hero-main-title {
+				font-size: 6rem;
+				font-weight: 300;
+				letter-spacing: 8px;
+				margin: 0 0 30px 0;
+				color: white;
+				text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+				opacity: 0;
+				transform: translateY(50px);
+				animation: slideUpFade 1.2s ease-out 0.5s forwards;
+			}
+
+			/* 英語サブタイトル */
+			.hero-english-subtitle {
+				font-size: 1.6rem;
+				font-weight: 300;
+				letter-spacing: 4px;
+				margin: 0 0 20px 0;
+				color: #c4a96a;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+				opacity: 0;
+				transform: translateY(30px);
+				animation: slideUpFade 1s ease-out 1s forwards;
+				font-family: "Georgia", serif;
+				font-style: italic;
+			}
+
+			/* キャッチコピー */
+			.hero-catchphrase {
+				font-size: 1.3rem;
+				font-weight: 300;
+				letter-spacing: 2px;
+				margin: 40px 0;
+				color: rgba(255, 255, 255, 0.9);
+				text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+				opacity: 0;
+				transform: translateY(30px);
+				animation: slideUpFade 1s ease-out 1.5s forwards;
+				line-height: 1.8;
+			}
+
+			/* 日本語サブタイトル */
+			.hero-japanese-subtitle {
+				position: absolute;
+				bottom: 160px;
+				left: 50%;
+				transform: translateX(-50%);
+				font-size: 2.8rem;
+				font-weight: 300;
+				letter-spacing: 3px;
+				color: white;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+				opacity: 0;
+				animation: slideUpFade 1s ease-out 2s forwards;
+			}
+
+			/* 装飾ライン */
+			.hero-decoration-line {
+				width: 100px;
+				height: 2px;
+				background: linear-gradient(90deg, transparent, #c4a96a, transparent);
+				margin: 30px auto;
+				opacity: 0;
+				animation: expandLine 1.5s ease-out 2.5s forwards;
+			}
+
+			/* スクロールインジケーター */
+			.scroll-indicator {
+				position: absolute;
+				bottom: 40px;
+				left: 50%;
+				transform: translateX(-50%);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: 20px;
-			}
-
-			.hero-main-title {
-				font-size: 7rem;
-				font-weight: bold;
-				letter-spacing: 4px;
-				margin: 0;
-				text-transform: uppercase;
-				color: white;
-				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-			}
-
-			.hero-english-subtitle {
-				font-size: 1.4rem;
-				font-weight: normal;
-				letter-spacing: 2px;
-				margin: 0;
-				color: white;
-				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-			}
-
-			.hero-japanese-subtitle {
-				position: absolute;
-				bottom: 130px;
-				font-size: 4.2rem;
-				font-weight: normal;
+				color: rgba(255, 255, 255, 0.7);
+				font-size: 0.9rem;
 				letter-spacing: 1px;
-				color: white;
-				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+				opacity: 0;
+				animation: fadeIn 1s ease-out 3s forwards;
+			}
+
+			.scroll-arrow {
+				margin-top: 10px;
+				width: 2px;
+				height: 30px;
+				background: linear-gradient(
+					to bottom,
+					rgba(196, 169, 106, 0.8),
+					transparent
+				);
+				animation: scrollBounce 2s ease-in-out infinite;
+			}
+
+			/* フローティング要素 */
+			.floating-element {
+				position: absolute;
+				opacity: 0.1;
+				animation: float 6s ease-in-out infinite;
+			}
+
+			.floating-element:nth-child(1) {
+				top: 20%;
+				left: 10%;
+				animation-delay: 0s;
+			}
+
+			.floating-element:nth-child(2) {
+				top: 60%;
+				right: 15%;
+				animation-delay: 2s;
+			}
+
+			.floating-element:nth-child(3) {
+				bottom: 30%;
+				left: 20%;
+				animation-delay: 4s;
+			}
+
+			/* アニメーション定義 */
+			@keyframes slideUpFade {
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes expandLine {
+				from {
+					width: 0;
+					opacity: 0;
+				}
+				to {
+					width: 100px;
+					opacity: 1;
+				}
+			}
+
+			@keyframes fadeIn {
+				to {
+					opacity: 1;
+				}
+			}
+
+			@keyframes scrollBounce {
+				0%,
+				100% {
+					transform: translateY(0);
+				}
+				50% {
+					transform: translateY(10px);
+				}
+			}
+
+			@keyframes float {
+				0%,
+				100% {
+					transform: translateY(0) rotate(0deg);
+				}
+				33% {
+					transform: translateY(-20px) rotate(10deg);
+				}
+				66% {
+					transform: translateY(10px) rotate(-5deg);
+				}
 			}
 
 			/* Welcome Section */
@@ -214,7 +365,7 @@
 
 			/* Services Grid */
 			.services-grid {
-				padding: 120px 0;
+				padding: 20px 0;
 				background: url("./img/bg.png") center/cover fixed,
 					rgba(248, 248, 248, 0.85);
 				background-attachment: fixed;
@@ -652,6 +803,23 @@
 			}
 
 			@media (max-width: 768px) {
+				/* モバイルでは背景を固定しない */
+				body {
+					background-attachment: scroll;
+				}
+
+				.welcome {
+					background-attachment: scroll;
+				}
+
+				.services-grid {
+					background-attachment: scroll;
+				}
+
+				.room-showcase {
+					background-attachment: scroll;
+				}
+
 				.main-nav {
 					display: none;
 				}
@@ -661,17 +829,28 @@
 				}
 
 				.hero-main-title {
-					font-size: 3rem;
+					font-size: 3.5rem;
+					letter-spacing: 4px;
 				}
 
 				.hero-english-subtitle {
+					font-size: 1.2rem;
+					letter-spacing: 2px;
+				}
+
+				.hero-catchphrase {
 					font-size: 1.1rem;
+					margin: 20px 0;
 				}
 
 				.hero-japanese-subtitle {
-					bottom: 30px;
-					right: 30px;
-					font-size: 1rem;
+					bottom: 190px;
+					font-size: 1.2rem;
+					letter-spacing: 2px;
+				}
+
+				.floating-element {
+					display: none;
 				}
 
 				.welcome-content,
@@ -753,10 +932,10 @@
 		<!-- Navigation -->
 		<nav class="top-nav">
 			<div class="nav-container">
-				<a href="#" class="logo">文武ん</a>
+				<a href="#hero" class="logo">文武ん</a>
 				<ul class="main-nav">
-					<li><a href="#services">サービス</a></li>
 					<li><a href="#about">会社概要</a></li>
+					<li><a href="#services">サービス</a></li>
 					<li><a href="#pricing">料金</a></li>
 					<li><a href="#awards">実績</a></li>
 					<li><a href="#contact">お問い合わせ</a></li>
@@ -767,15 +946,30 @@
 
 		<!-- Hero Section -->
 		<section class="hero" id="hero">
+			<!-- フローティング装飾要素 -->
+			<div class="floating-element">⚡</div>
+			<div class="floating-element">🔧</div>
+			<div class="floating-element">✨</div>
+
 			<div class="hero-content">
 				<h1 class="hero-main-title">文武ん</h1>
-				<p class="hero-english-subtitle">ENGINE FOR THE LIFE</p>
+				<p class="hero-english-subtitle">Professional Life Support</p>
+				<div class="hero-decoration-line"></div>
+				<p class="hero-catchphrase">
+					あなたの「困った」を「解決」に変える<br />
+					信頼のパートナー
+				</p>
 			</div>
-			<div class="hero-japanese-subtitle">~住まいに豊かさを~</div>
+
+			<!-- スクロールインジケーター -->
+			<div class="scroll-indicator">
+				<span>SCROLL</span>
+				<div class="scroll-arrow"></div>
+			</div>
 		</section>
 
 		<!-- Welcome Section -->
-		<section class="welcome">
+		<section class="welcome" id="about">
 			<div class="container">
 				<div class="welcome-content">
 					<div class="welcome-image">
@@ -787,7 +981,6 @@
 						/>
 					</div>
 					<div class="welcome-text">
-						<p class="welcome-label">ようこそ</p>
 						<h2>文武ん<br />便利屋サービス</h2>
 						<p>
 							文武んは、お客様の大切な日常を支える信頼のパートナーです。熟練した技術と心のこもったサービスで、あらゆるお困りごとを解決いたします。
@@ -812,19 +1005,24 @@
 			<div class="grid-container">
 				<div class="service-card">
 					<div class="service-icon"></div>
-					<h3>エレガントで<br />精密な作業</h3>
+					<h3>Elegant Precision, <br />Everyday Solutions.</h3>
 					<p>
-						長年の経験と熟練した技術により、文武んのスタッフは細部にまでこだわった丁寧な作業を心がけています。
+						長年の経験と熟練の技術を活かし、文武んのスタッフは<br />「暮らしの細部」にまで目を配った丁寧な作業を心がけています。<br /><br />
+						家具の組み立てから設備のメンテナンスまで、<br />どんなご依頼も一つひとつ、手仕事のように丁寧に。<br />
 					</p>
-					<p class="service-feature">お客様の満足度99.8%を誇る品質保証</p>
+					<p class="service-feature">
+						確かな品質で、あなたの「ちょっと困った」に応えます。
+					</p>
 				</div>
 				<div class="service-card light">
 					<div class="service-icon"></div>
-					<h3>上質な<br />お食事体験</h3>
+					<h3>Quiet Skills.<br />Trusted Results.</h3>
 					<p>
-						料理代行サービスでは、プロの料理人による本格的なお食事をご自宅でお楽しみいただけます。
+						文武んは、日々の雑務から特別なサポートまで、<br />
+						あらゆる“暮らしの仕事”に、上質な対応をお約束します。<br />
+						便利屋でありながら、職人のように。
 					</p>
-					<p class="service-feature">特別な日のお食事から日常の家庭料理まで</p>
+					<p class="service-feature">一つひとつの作業を、確かに、美しく。</p>
 				</div>
 			</div>
 		</section>
@@ -916,7 +1114,7 @@
 			</div>
 		</section>
 
-		<section class="gallery" id="about">
+		<section class="gallery" id="awards">
 			<div class="container">
 				<h2>お客様との大切な時間を</h2>
 				<div class="gallery-grid">
@@ -1015,7 +1213,7 @@
 		<script>
 			// FV背景画像を固定
 			const hero = document.getElementById("hero");
-			hero.style.background = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('./img/mv.png') center/cover`;
+			hero.style.background = `linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(44, 44, 44, 0.5) 100%), url('./img/mv.png') center/cover`;
 
 			// Smooth scrolling
 			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -1097,6 +1295,15 @@
 					}
 				});
 			}
+
+			// Scroll indicator animation
+			document
+				.querySelector(".scroll-indicator")
+				.addEventListener("click", () => {
+					document.querySelector(".welcome").scrollIntoView({
+						behavior: "smooth",
+					});
+				});
 		</script>
 	</body>
 </html>
