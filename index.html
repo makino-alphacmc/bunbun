@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>文武ん - プロフェッショナル便利屋サービス</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho",
+					"HG Mincho E", "MS PMincho", "MS Mincho", serif;
+				line-height: 1.6;
+				color: #333;
+				overflow-x: hidden;
+				background: url("./img/bg.png") center/cover fixed;
+				background-attachment: fixed;
+				background-repeat: no-repeat;
+				min-height: 100vh;
+			}
+
+			/* Header Navigation */
+			.top-nav {
+				background: rgba(0, 0, 0, 0.9);
+				padding: 15px 0;
+				position: fixed;
+				width: 100%;
+				top: 0;
+				z-index: 1000;
+				backdrop-filter: blur(10px);
+			}
+
+			.nav-container {
+				max-width: 1200px;
+				margin: 0 auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 40px;
+			}
+
+			.logo {
+				color: #c4a96a;
+				font-size: 1.8rem;
+				font-weight: bold;
+				text-decoration: none;
+				letter-spacing: 2px;
+			}
+
+			.main-nav {
+				display: flex;
+				list-style: none;
+				gap: 40px;
+			}
+
+			.main-nav a {
+				color: white;
+				text-decoration: none;
+				font-size: 0.9rem;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				transition: color 0.3s ease;
+			}
+
+			.main-nav a:hover {
+				color: #c4a96a;
+			}
+
+			.book-btn {
+				background: #c4a96a;
+				color: white;
+				padding: 12px 25px;
+				text-decoration: none;
+				font-size: 0.85rem;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				transition: all 0.3s ease;
+			}
+
+			.book-btn:hover {
+				background: #b8994d;
+				transform: translateY(-2px);
+			}
+
+			/* Hero Section */
+			.hero {
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				color: white;
+				position: relative;
+				background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+					url("https://images.unsplash.com/photo-1581091012184-7f9d50c0e3a2?fit=crop&w=1200&q=80")
+						center/cover;
+				transition: background 0.5s ease;
+			}
+
+			.hero-content {
+				max-width: 800px;
+				padding: 0 40px;
+				z-index: 1;
+			}
+
+			.hero-logo {
+				width: 80px;
+				height: 2px;
+				background: #c4a96a;
+				margin: 0 auto 30px;
+			}
+
+			.hero h1 {
+				font-size: 4rem;
+				font-weight: 300;
+				letter-spacing: 4px;
+				margin-bottom: 10px;
+				text-transform: uppercase;
+			}
+
+			.hero-subtitle {
+				font-size: 1.2rem;
+				font-weight: 300;
+				letter-spacing: 2px;
+				opacity: 0.9;
+			}
+
+			.hero-nav {
+				position: absolute;
+				bottom: 40px;
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				gap: 15px;
+			}
+
+			.hero-dot {
+				width: 12px;
+				height: 12px;
+				border: 2px solid rgba(255, 255, 255, 0.5);
+				border-radius: 50%;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+			.hero-dot.active {
+				background: white;
+				border-color: white;
+			}
+
+			/* Welcome Section */
+			.welcome {
+				padding: 120px 0;
+				background: url("./img/bg.png") center/cover fixed,
+					rgba(255, 255, 255, 0.9);
+				background-attachment: fixed;
+				backdrop-filter: blur(5px);
+			}
+
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 40px;
+			}
+
+			.welcome-content {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 80px;
+				align-items: center;
+			}
+
+			.welcome-image {
+				position: relative;
+				overflow: hidden;
+				border-radius: 8px;
+			}
+
+			.welcome-image img {
+				width: 100%;
+				height: 400px;
+				object-fit: cover;
+				border-radius: 8px;
+			}
+
+			.welcome-text {
+				padding-left: 40px;
+			}
+
+			.welcome-label {
+				color: #c4a96a;
+				font-size: 0.9rem;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				margin-bottom: 20px;
+			}
+
+			.welcome h2 {
+				font-size: 2.8rem;
+				font-weight: 300;
+				color: #2c2c2c;
+				margin-bottom: 30px;
+				line-height: 1.2;
+			}
+
+			.welcome p {
+				font-size: 1.1rem;
+				color: #666;
+				line-height: 1.8;
+				margin-bottom: 25px;
+			}
+
+			.stars {
+				display: flex;
+				gap: 5px;
+				margin-top: 30px;
+			}
+
+			.star {
+				color: #c4a96a;
+				font-size: 1.2rem;
+			}
+
+			/* Services Grid */
+			.services-grid {
+				padding: 120px 0;
+				background: url("./img/bg.png") center/cover fixed,
+					rgba(248, 248, 248, 0.85);
+				background-attachment: fixed;
+				backdrop-filter: blur(5px);
+			}
+
+			.grid-container {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.service-card {
+				background: #2c2c2c;
+				color: white;
+				padding: 80px 60px;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.service-card.light {
+				background: white;
+				color: #2c2c2c;
+			}
+
+			.service-card h3 {
+				font-size: 2.2rem;
+				font-weight: 300;
+				margin-bottom: 30px;
+				line-height: 1.2;
+			}
+
+			.service-icon {
+				width: 60px;
+				height: 2px;
+				background: #c4a96a;
+				margin-bottom: 30px;
+			}
+
+			.service-card p {
+				font-size: 1rem;
+				line-height: 1.8;
+				opacity: 0.9;
+				margin-bottom: 20px;
+			}
+
+			.service-feature {
+				font-style: italic;
+				color: #c4a96a;
+				font-size: 0.9rem;
+			}
+
+			/* Room Showcase - Pricing Section */
+			.room-showcase {
+				padding: 120px 0;
+				background: url("./img/bg.png") center/cover fixed,
+					linear-gradient(
+						135deg,
+						rgba(248, 246, 240, 0.85) 0%,
+						rgba(255, 255, 255, 0.85) 100%
+					);
+				background-attachment: fixed;
+				position: relative;
+				backdrop-filter: blur(5px);
+			}
+
+			.pricing-header {
+				text-align: center;
+				margin-bottom: 80px;
+			}
+
+			.pricing-header h2 {
+				font-size: 3rem;
+				font-weight: 300;
+				color: #2c2c2c;
+				margin-bottom: 20px;
+				letter-spacing: 2px;
+			}
+
+			.pricing-subtitle {
+				font-size: 1.2rem;
+				color: #c4a96a;
+				font-weight: 300;
+				letter-spacing: 1px;
+			}
+
+			.showcase-content {
+				max-width: 1400px;
+				margin: 0 auto;
+				padding: 0 40px;
+			}
+
+			/* 新しい料金レイアウト */
+			.pricing-container {
+				display: flex;
+				flex-direction: column;
+				gap: 40px;
+				align-items: center;
+			}
+
+			/* メイン料金カード（作業費）*/
+			.featured-card-container {
+				width: 100%;
+				max-width: 500px;
+			}
+
+			.price-card.featured {
+				background: linear-gradient(135deg, #c4a96a, #d4b876);
+				color: white;
+				border-radius: 25px;
+				padding: 50px 40px;
+				text-align: center;
+				position: relative;
+				overflow: hidden;
+				transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				box-shadow: 0 15px 50px rgba(196, 169, 106, 0.3);
+				border: none;
+				transform: scale(1.05);
+			}
+
+			.price-card.featured:hover {
+				transform: scale(1.08) translateY(-10px);
+				box-shadow: 0 25px 70px rgba(196, 169, 106, 0.4);
+			}
+
+			.price-card.featured::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 5px;
+				background: rgba(255, 255, 255, 0.3);
+				border-radius: 25px 25px 0 0;
+			}
+
+			/* その他の料金カード */
+			.other-cards-container {
+				width: 100%;
+			}
+
+			.price-cards {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 25px;
+			}
+
+			.price-card {
+				background: rgba(255, 255, 255, 0.9);
+				border-radius: 20px;
+				padding: 35px 25px;
+				text-align: center;
+				position: relative;
+				overflow: hidden;
+				transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				box-shadow: 0 8px 30px rgba(196, 169, 106, 0.1);
+				border: 1px solid rgba(196, 169, 106, 0.1);
+				backdrop-filter: blur(10px);
+			}
+
+			.price-card:hover {
+				transform: translateY(-10px) scale(1.02);
+				box-shadow: 0 20px 50px rgba(196, 169, 106, 0.2);
+				border-color: #c4a96a;
+			}
+
+			.price-card::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 4px;
+				background: linear-gradient(90deg, #c4a96a, #d4b876, #c4a96a);
+				border-radius: 20px 20px 0 0;
+			}
+
+			.price-icon {
+				width: 70px;
+				height: 70px;
+				margin: 0 auto 20px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, #c4a96a, #d4b876);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 6px 20px rgba(196, 169, 106, 0.3);
+				transition: transform 0.3s ease;
+				font-size: 1.8rem;
+				color: white;
+			}
+
+			.price-card:hover .price-icon {
+				transform: scale(1.1) rotate(5deg);
+			}
+
+			/* フィーチャーカードのアイコン */
+			.price-card.featured .price-icon {
+				width: 90px;
+				height: 90px;
+				background: rgba(255, 255, 255, 0.2);
+				backdrop-filter: blur(10px);
+				font-size: 2.2rem;
+				margin-bottom: 25px;
+			}
+
+			.price-title {
+				font-size: 1.3rem;
+				font-weight: bold;
+				color: #2c2c2c;
+				margin-bottom: 15px;
+				letter-spacing: 1px;
+			}
+
+			.price-card.featured .price-title {
+				color: white;
+				font-size: 1.6rem;
+			}
+
+			.price-amount {
+				font-size: 2rem;
+				font-weight: bold;
+				color: #c4a96a;
+				margin-bottom: 8px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 5px;
+			}
+
+			.price-card.featured .price-amount {
+				color: white;
+				font-size: 2.5rem;
+			}
+
+			.price-main {
+				display: block;
+			}
+
+			.price-unit {
+				font-size: 0.9rem;
+				color: #666;
+				font-weight: normal;
+			}
+
+			.price-card.featured .price-unit {
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 1rem;
+			}
+
+			.tax {
+				font-size: 0.85rem;
+				color: #999;
+				font-weight: normal;
+				margin-top: 5px;
+			}
+
+			.price-card.featured .tax {
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 0.9rem;
+			}
+
+			.price-desc {
+				font-size: 0.95rem;
+				color: #666;
+				line-height: 1.6;
+				margin-top: 15px;
+				padding-top: 15px;
+				border-top: 1px solid #f0f0f0;
+			}
+
+			.price-card.featured .price-desc {
+				color: rgba(255, 255, 255, 0.9);
+				border-top-color: rgba(255, 255, 255, 0.2);
+				font-size: 1rem;
+				margin-top: 20px;
+				padding-top: 20px;
+			}
+
+			/* 料金表の装飾要素 */
+			.pricing-decoration {
+				position: absolute;
+				top: 10%;
+				right: 5%;
+				width: 100px;
+				height: 100px;
+				background: linear-gradient(
+					45deg,
+					rgba(196, 169, 106, 0.1),
+					rgba(212, 184, 118, 0.1)
+				);
+				border-radius: 50%;
+				z-index: 1;
+			}
+
+			.pricing-decoration:nth-child(2) {
+				top: 60%;
+				left: 5%;
+				width: 150px;
+				height: 150px;
+			}
+
+			/* Gallery Section */
+			.gallery {
+				padding: 120px 0;
+				background: #2c2c2c;
+				color: white;
+				text-align: center;
+			}
+
+			.gallery h2 {
+				font-size: 2.5rem;
+				font-weight: 300;
+				margin-bottom: 20px;
+			}
+
+			.gallery-subtitle {
+				font-size: 1.8rem;
+				font-weight: 300;
+				color: #c4a96a;
+				margin-bottom: 60px;
+			}
+
+			.gallery-grid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 20px;
+				max-width: 1200px;
+				margin: 0 auto 60px;
+			}
+
+			.gallery-item {
+				aspect-ratio: 1;
+				border-radius: 8px;
+				transition: transform 0.3s ease;
+				position: relative;
+				overflow: hidden;
+				background: #3c3c3c;
+				cursor: pointer;
+			}
+
+			.gallery-item img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 8px;
+			}
+
+			.gallery-item::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(
+					135deg,
+					rgba(196, 169, 106, 0.2),
+					rgba(212, 184, 118, 0.2)
+				);
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.gallery-item:hover {
+				transform: scale(1.05);
+			}
+
+			.gallery-item:hover::after {
+				opacity: 1;
+			}
+
+			.gallery p {
+				max-width: 800px;
+				margin: 0 auto;
+				font-size: 1.1rem;
+				line-height: 1.8;
+				opacity: 0.9;
+			}
+
+			/* Footer */
+			footer {
+				background: url("./img/bg.png") center/cover fixed,
+					rgba(255, 255, 255, 0.9);
+				background-attachment: fixed;
+				padding: 60px 0;
+				text-align: center;
+				border-top: 1px solid rgba(238, 238, 238, 0.5);
+				backdrop-filter: blur(5px);
+			}
+
+			.footer-nav {
+				display: flex;
+				justify-content: center;
+				gap: 40px;
+				margin-bottom: 40px;
+			}
+
+			.footer-nav a {
+				color: #666;
+				text-decoration: none;
+				font-size: 0.9rem;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				transition: color 0.3s ease;
+			}
+
+			.footer-nav a:hover {
+				color: #c4a96a;
+			}
+
+			.footer-info {
+				color: #999;
+				font-size: 0.8rem;
+				line-height: 1.6;
+			}
+
+			/* Mobile Navigation Toggle */
+			.mobile-nav-toggle {
+				display: none;
+				background: transparent;
+				border: none;
+				color: #c4a96a;
+				font-size: 2rem;
+				cursor: pointer;
+				padding: 5px;
+			}
+
+			/* Responsive Design */
+			@media (max-width: 1024px) {
+				.price-cards {
+					grid-template-columns: repeat(2, 1fr);
+					gap: 20px;
+				}
+			}
+
+			@media (max-width: 768px) {
+				.main-nav {
+					display: none;
+				}
+
+				.mobile-nav-toggle {
+					display: block;
+				}
+
+				.hero h1 {
+					font-size: 2.5rem;
+				}
+
+				.welcome-content,
+				.showcase-content {
+					grid-template-columns: 1fr;
+					gap: 40px;
+				}
+
+				.welcome-text {
+					padding-left: 0;
+				}
+
+				.grid-container {
+					grid-template-columns: 1fr;
+				}
+
+				.gallery-grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+
+				.container {
+					padding: 0 20px;
+				}
+
+				.service-card {
+					padding: 60px 40px;
+				}
+
+				.price-cards {
+					grid-template-columns: 1fr;
+					gap: 15px;
+				}
+
+				.price-card.featured {
+					transform: none;
+				}
+
+				.pricing-header h2 {
+					font-size: 2rem;
+				}
+
+				.footer-nav {
+					flex-wrap: wrap;
+					gap: 20px;
+				}
+
+				.pricing-container {
+					gap: 30px;
+				}
+
+				.featured-card-container {
+					max-width: 100%;
+				}
+			}
+
+			/* Animations */
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.fade-in {
+				animation: fadeInUp 0.8s ease-out;
+			}
+
+			/* Smooth scrolling */
+			html {
+				scroll-behavior: smooth;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Navigation -->
+		<nav class="top-nav">
+			<div class="nav-container">
+				<a href="#" class="logo">文武ん</a>
+				<ul class="main-nav">
+					<li><a href="#services">サービス</a></li>
+					<li><a href="#about">会社概要</a></li>
+					<li><a href="#pricing">料金</a></li>
+					<li><a href="#awards">実績</a></li>
+					<li><a href="#contact">お問い合わせ</a></li>
+				</ul>
+				<button class="mobile-nav-toggle">☰</button>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<section class="hero" id="hero">
+			<div class="hero-content">
+				<div class="hero-logo"></div>
+				<h1>文武ん</h1>
+				<p class="hero-subtitle">プロフェッショナル便利屋サービス</p>
+			</div>
+			<div class="hero-nav">
+				<div class="hero-dot active"></div>
+				<div class="hero-dot"></div>
+				<div class="hero-dot"></div>
+				<div class="hero-dot"></div>
+			</div>
+		</section>
+
+		<!-- Welcome Section -->
+		<section class="welcome">
+			<div class="container">
+				<div class="welcome-content">
+					<div class="welcome-image">
+						<img
+							src="./img/welcome.png"
+							alt="工具と作業の様子"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="welcome-text">
+						<p class="welcome-label">ようこそ</p>
+						<h2>文武ん<br />便利屋サービス</h2>
+						<p>
+							文武んは、お客様の大切な日常を支える信頼のパートナーです。熟練した技術と心のこもったサービスで、あらゆるお困りごとを解決いたします。
+						</p>
+						<p>
+							小さな修理から大掛かりな作業まで、私たちの経験豊富なスタッフが、最高品質のサービスをお届けします。
+						</p>
+						<div class="stars">
+							<span class="star">★</span>
+							<span class="star">★</span>
+							<span class="star">★</span>
+							<span class="star">★</span>
+							<span class="star">★</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Services Grid -->
+		<section class="services-grid" id="services">
+			<div class="grid-container">
+				<div class="service-card">
+					<div class="service-icon"></div>
+					<h3>エレガントで<br />精密な作業</h3>
+					<p>
+						長年の経験と熟練した技術により、文武んのスタッフは細部にまでこだわった丁寧な作業を心がけています。
+					</p>
+					<p class="service-feature">お客様の満足度99.8%を誇る品質保証</p>
+				</div>
+				<div class="service-card light">
+					<div class="service-icon"></div>
+					<h3>上質な<br />お食事体験</h3>
+					<p>
+						料理代行サービスでは、プロの料理人による本格的なお食事をご自宅でお楽しみいただけます。
+					</p>
+					<p class="service-feature">特別な日のお食事から日常の家庭料理まで</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Room Showcase - Updated Pricing Section -->
+		<section class="room-showcase" id="pricing">
+			<div class="pricing-decoration"></div>
+			<div class="pricing-decoration"></div>
+
+			<div class="showcase-content">
+				<div class="pricing-header">
+					<h2>料金表</h2>
+					<p class="pricing-subtitle">透明性のある明確な料金体系</p>
+				</div>
+
+				<div class="pricing-container">
+					<!-- メイン料金カード（作業費） -->
+					<div class="featured-card-container">
+						<div class="price-card featured">
+							<div class="price-icon">⚡</div>
+							<div class="price-title">作業費（基本料金）</div>
+							<div class="price-amount">
+								<span class="price-main">3,300円</span>
+								<span class="price-unit">1名 / 1時間</span>
+							</div>
+							<div class="tax">（税込）</div>
+							<div class="price-desc">
+								8:00〜17:00までの標準作業時間。<br />
+								熟練スタッフによる丁寧な作業をお約束します。
+							</div>
+						</div>
+					</div>
+
+					<!-- その他の料金カード -->
+					<div class="other-cards-container">
+						<div class="price-cards">
+							<div class="price-card">
+								<div class="price-icon">🚗</div>
+								<div class="price-title">出張費</div>
+								<div class="price-amount">
+									<span class="price-main">2,200円</span>
+									<span class="price-unit">1名あたり</span>
+								</div>
+								<div class="tax">（税込）</div>
+								<div class="price-desc">
+									作業員がご依頼先へ伺う際の基本出張費用です。
+								</div>
+							</div>
+
+							<div class="price-card">
+								<div class="price-icon">🚛</div>
+								<div class="price-title">車両費</div>
+								<div class="price-amount">
+									<span class="price-main">3,300円</span>
+									<span class="price-unit">1台あたり</span>
+								</div>
+								<div class="tax">（税込）</div>
+								<div class="price-desc">
+									専用工具や機材を使用する作業の際にかかる車両使用料です。
+								</div>
+							</div>
+
+							<div class="price-card">
+								<div class="price-icon">🔧</div>
+								<div class="price-title">材料費</div>
+								<div class="price-amount">
+									<span class="price-main">実費</span>
+									<span class="price-unit">お見積り</span>
+								</div>
+								<div class="price-desc">
+									造作工事や修繕に必要な材料、お買い物代行等でかかる実費です。
+								</div>
+							</div>
+
+							<div class="price-card">
+								<div class="price-icon">🚅</div>
+								<div class="price-title">交通費</div>
+								<div class="price-amount">
+									<span class="price-main">実費</span>
+									<span class="price-unit">お見積り</span>
+								</div>
+								<div class="price-desc">
+									遠方への出張や公共交通機関を利用する場合の交通費です。
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="gallery" id="about">
+			<div class="container">
+				<h2>お客様との大切な時間を</h2>
+				<div class="gallery-grid">
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_1.png"
+							alt="gallery1"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_2.png"
+							alt="gallery2"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_3.png"
+							alt="gallery3"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_4.png"
+							alt="gallery4"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_5.png"
+							alt="gallery5"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_6.png"
+							alt="gallery6"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_7.png"
+							alt="gallery7"
+							width="300"
+							height="300"
+						/>
+					</div>
+					<div class="gallery-item">
+						<img
+							src="./img/benriya_8.png"
+							alt="gallery8"
+							width="300"
+							height="300"
+						/>
+					</div>
+				</div>
+				<p>
+					リラックスしてお楽しみください。文武んの新しく改装された設備と素晴らしいサービスをお楽しみください。
+					細については、お気軽にお問い合わせください。最高の体験をお約束いたします。
+				</p>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer id="contact">
+			<div class="container">
+				<nav class="footer-nav">
+					<a href="#about">会社概要</a>
+					<a href="#services">サービス</a>
+					<a href="#pricing">料金案内</a>
+					<a href="#awards">実績</a>
+					<a href="#contact">お問い合わせ</a>
+				</nav>
+				<div class="footer-info">
+					<p>
+						〒123-4567 東京都渋谷区〇〇 1-2-3 | TEL: 03-1234-5678 | FAX:
+						03-1234-5679
+					</p>
+					<p>© 2025 文武ん. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// Smooth scrolling
+			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+				anchor.addEventListener("click", function (e) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute("href"));
+					if (target) {
+						target.scrollIntoView({
+							behavior: "smooth",
+							block: "start",
+						});
+					}
+				});
+			});
+
+			// Header scroll effect
+			window.addEventListener("scroll", () => {
+				const nav = document.querySelector(".top-nav");
+				if (window.scrollY > 100) {
+					nav.style.background = "rgba(0, 0, 0, 0.95)";
+				} else {
+					nav.style.background = "rgba(0, 0, 0, 0.9)";
+				}
+			});
+
+			// FV背景画像切替
+			const hero = document.getElementById("hero");
+			const dots = document.querySelectorAll(".hero-dot");
+			const heroImages = [
+				"https://images.unsplash.com/photo-1581091012184-7f9d50c0e3a2?fit=crop&w=1200&q=80",
+				"https://images.unsplash.com/photo-1521791136064-7986c2920216?fit=crop&w=1200&q=80",
+				"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?fit=crop&w=1200&q=80",
+				"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fit=crop&w=1200&q=80",
+			];
+			let currentIndex = 0;
+
+			function updateHeroBackground(index) {
+				hero.style.background = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${heroImages[index]}') center/cover`;
+				dots.forEach((d) => d.classList.remove("active"));
+				dots[index].classList.add("active");
+			}
+
+			dots.forEach((dot, i) => {
+				dot.addEventListener("click", () => {
+					currentIndex = i;
+					updateHeroBackground(currentIndex);
+				});
+			});
+
+			// Auto-rotate hero images
+			setInterval(() => {
+				currentIndex = (currentIndex + 1) % heroImages.length;
+				updateHeroBackground(currentIndex);
+			}, 5000);
+
+			// Gallery item hover effects
+			const galleryItems = document.querySelectorAll(".gallery-item");
+			galleryItems.forEach((item) => {
+				item.addEventListener("mouseenter", () => {
+					item.style.transform = "scale(1.05) rotate(5deg)";
+				});
+				item.addEventListener("mouseleave", () => {
+					item.style.transform = "scale(1) rotate(0deg)";
+				});
+			});
+
+			// Price card animation on scroll
+			const observerOptions = {
+				threshold: 0.1,
+				rootMargin: "0px 0px -50px 0px",
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.style.opacity = "1";
+						entry.target.style.transform = "translateY(0)";
+					}
+				});
+			}, observerOptions);
+
+			// Observe price cards for animation
+			document.querySelectorAll(".price-card").forEach((card, index) => {
+				card.style.opacity = "0";
+				card.style.transform = "translateY(30px)";
+				card.style.transition = `opacity 0.6s ease ${
+					index * 0.1
+				}s, transform 0.6s ease ${index * 0.1}s`;
+				observer.observe(card);
+			});
+
+			// Mobile navigation toggle
+			const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
+			const mainNav = document.querySelector(".main-nav");
+
+			if (mobileNavToggle) {
+				mobileNavToggle.addEventListener("click", () => {
+					if (mainNav.style.display === "flex") {
+						mainNav.style.display = "none";
+					} else {
+						mainNav.style.display = "flex";
+						mainNav.style.position = "absolute";
+						mainNav.style.top = "100%";
+						mainNav.style.left = "0";
+						mainNav.style.right = "0";
+						mainNav.style.background = "rgba(0, 0, 0, 0.95)";
+						mainNav.style.flexDirection = "column";
+						mainNav.style.padding = "20px";
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
